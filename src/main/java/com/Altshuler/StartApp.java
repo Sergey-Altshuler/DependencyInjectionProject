@@ -2,7 +2,6 @@ package com.Altshuler;
 
 import com.Altshuler.customClass.CustomFirstClass;
 import com.Altshuler.customClass.CustomFirstInterface;
-import com.Altshuler.customScanned.CustomClassWithConstructor;
 import com.Altshuler.injector.Injector;
 import com.Altshuler.injector.InjectorImpl;
 import com.Altshuler.provider.Provider;
