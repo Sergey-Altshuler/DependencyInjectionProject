@@ -27,14 +27,9 @@ public class InjectorImpl implements Injector {
     }
 
     @Override
-    public <T> void bind(Class<T> intf, Class<? extends T> impl) throws InstantiationException, IllegalAccessException, InvocationTargetException {
+    public <T> void bind(Class<T> intf, Class<? extends T> impl) throws InstantiationException, IllegalAccessException, InvocationTargetException, BindingNotFoundException, ConstructorNotFoundException, TooManyConstructorsException {
         if ((getProvider(intf) == null) || (!getProvider(intf).getInstance().getClass().equals(impl))) {
-            try {
                 throw new BindingNotFoundException();
-            } catch (BindingNotFoundException e) {
-                e.printStackTrace();
-                return;
-            }
         }
         List<Class> classList = InjectionInfo.getScannedList();
         for (Class clazz : classList) {
@@ -45,24 +40,14 @@ public class InjectorImpl implements Injector {
                 if ((constructor.getParameterCount() > 0) && ((Arrays.stream(constructor.getParameterTypes()).filter(aClass -> aClass.equals(intf)).count()>=1))
                         && ((Arrays.stream(constructor.getAnnotations()).count() == 0) ||
                         (Arrays.stream(constructor.getAnnotations()).noneMatch(annotation -> annotation.annotationType().getSimpleName().equals("Inject"))))) {
-                    try {
                         throw new ConstructorNotFoundException();
-                    } catch (ConstructorNotFoundException e) {
-                        e.printStackTrace();
-                        return;
-                    }
                 }
                 Annotation[] annotations = constructor.getDeclaredAnnotations();
                 for (Annotation annotation : annotations) {
                     if (annotation.annotationType().getSimpleName().equals("Inject")) {
                         countOfAnnotatedConstructors++;
                         if (countOfAnnotatedConstructors > 1) {
-                            try {
                                 throw new TooManyConstructorsException();
-                            } catch (TooManyConstructorsException e) {
-                               e.printStackTrace();
-                                return;
-                            }
                         }
                         if ((constructor.getParameterCount() == 1) && (Arrays.stream(constructor.getParameterTypes()).findFirst().get().equals(intf))) {
                            Object obj = constructor.newInstance(impl.newInstance());

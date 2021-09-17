@@ -1,4 +1,4 @@
-package com.Altshuler.examlpeClass;
+package com.Altshuler.exampleClass;
 
 import com.Altshuler.exampleInterface.Movable;
 

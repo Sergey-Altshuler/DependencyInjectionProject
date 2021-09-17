@@ -1,9 +1,9 @@
 package com.Altshuler.launch;
 
 import com.Altshuler.classScanner.ClassScanner;
-import com.Altshuler.examlpeClass.Calculator;
-import com.Altshuler.examlpeClass.Plane;
-import com.Altshuler.examlpeClass.Vehicle;
+import com.Altshuler.exampleClass.Calculator;
+import com.Altshuler.exampleClass.Plane;
+import com.Altshuler.exampleClass.Vehicle;
 import com.Altshuler.exampleInterface.Countable;
 import com.Altshuler.exampleInterface.Flyable;
 import com.Altshuler.exampleInterface.Movable;
